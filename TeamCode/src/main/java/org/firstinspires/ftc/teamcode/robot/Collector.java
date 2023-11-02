@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.robot;
 
+import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.IN;
+import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.OFF;
+import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.OUT;
+
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -20,7 +24,37 @@ public class Collector {
     public enum CollectorState {
         OFF, IN, OUT
     }
+    Collector collector;
 
-    CollectorState collectorState = CollectorState.OFF;
+
+
+    CollectorState collectorState = OFF;
+
+    private void collectorstate() {
+        switch (collector) {
+            case OFF: {
+                collectorOff();
+                break;
+            }
+            case IN: {
+                collectorIn();
+                break;
+            }
+            case OUT: {
+                collectorOut();
+                break;
+            }
+        }
+    }
+
+    public void collectorOff(){
+        collectorMotor.setPower(0);
+    }
+    public void collectorIn(){
+        collectorMotor.setPower(0.5);
+    }
+    public void collectorOut(){
+        collectorMotor.setPower(-0.5);
+    }
 
 }
