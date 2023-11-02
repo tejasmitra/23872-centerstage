@@ -10,51 +10,48 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.CachingMotor;
 
-public class Collector {
+public class Transfer {
     private Telemetry telemetry;
-    private DcMotorEx collectorMotor;
+    private DcMotorEx transferMotor;
     private HardwareMap hardwareMap;
-    public Collector(HardwareMap hardwareMap,Telemetry telemetry){
+    public Transfer(HardwareMap hardwareMap,Telemetry telemetry) {
         this.telemetry=telemetry;
         this.hardwareMap=hardwareMap;
 
-        collectorMotor = new CachingMotor(hardwareMap.get(DcMotorEx.class, "collector"));
+        transferMotor = new CachingMotor(hardwareMap.get(DcMotorEx.class,"transfer"));
     }
-
-    public enum CollectorState {
+    public enum TransferState {
         OFF, IN, OUT
     }
-    Collector collector;
 
+    Transfer transfer;
 
-
-    CollectorState collectorState = OFF;
-
-    private void collectorState() {
-        switch (collector) {
+    TransferState transferState = OFF;
+    
+    private void transferState() {
+        switch (transfer) {
             case OFF: {
-                collectorOff();
+                transferOff();
                 break;
             }
             case IN: {
-                collectorIn();
+                transferIn();
                 break;
             }
             case OUT: {
-                collectorOut();
+                transferOut();
                 break;
             }
         }
     }
 
-    public void collectorOff(){
-        collectorMotor.setPower(0);
+    public void transferOff(){
+        transferMotor.setPower(0);
     }
-    public void collectorIn(){
-        collectorMotor.setPower(0.5);
+    public void transferIn(){
+        transferMotor.setPower(0.5);
     }
-    public void collectorOut(){
-        collectorMotor.setPower(-0.5);
+    public void transferOut(){
+        transferMotor.setPower(-0.5);
     }
-
 }
