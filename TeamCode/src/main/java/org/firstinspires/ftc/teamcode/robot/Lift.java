@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
@@ -9,5 +9,13 @@ import java.util.Map;
 public class Lift {
     private Telemetry telemetry;
     private DcMotorEx LiftMotor;
-    private Map statemap;
+
+
+
+    public enum LiftState {
+        DEFAULT, SCORING, MAX, HOLDING
+    }
+
+    public LiftState liftState = LiftState.DEFAULT;
+
 }
