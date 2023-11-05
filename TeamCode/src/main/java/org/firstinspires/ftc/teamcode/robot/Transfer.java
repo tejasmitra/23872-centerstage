@@ -24,12 +24,12 @@ public class Transfer {
         OFF, IN, OUT
     }
 
-    Transfer transfer;
 
-    TransferState transferState = OFF;
+
+    TransferState transferState = TransferState.OFF;
     
-    private void transferState() {
-        switch (transfer) {
+    public void transferState(){
+        switch (transferState) {
             case OFF: {
                 transferOff();
                 break;
@@ -45,13 +45,24 @@ public class Transfer {
         }
     }
 
-    public void transferOff(){
+    public void setTransferOff(){
+        transferState = Transfer.TransferState.OFF;
+    }
+
+    public void setTransferIn(){
+        transferState = Transfer.TransferState.IN;
+    }
+
+    public void setTransferOut(){
+        transferState = Transfer.TransferState.OUT;
+    }
+    private void transferOff(){
         transferMotor.setPower(0);
     }
-    public void transferIn(){
+    private void transferIn(){
         transferMotor.setPower(0.5);
     }
-    public void transferOut(){
+    private void transferOut(){
         transferMotor.setPower(-0.5);
     }
 }

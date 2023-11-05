@@ -24,14 +24,11 @@ public class Collector {
     public enum CollectorState {
         OFF, IN, OUT
     }
-    Collector collector;
-
-
 
     CollectorState collectorState = OFF;
 
-    private void collectorState() {
-        switch (collector) {
+    public void collectorState() {
+        switch (collectorState) {
             case OFF: {
                 collectorOff();
                 break;
@@ -47,13 +44,25 @@ public class Collector {
         }
     }
 
-    public void collectorOff(){
+    public void setCollectorOff(){
+        collectorState = CollectorState.OFF;
+    }
+
+    public void setCollectorIn(){
+        collectorState = CollectorState.IN;
+    }
+
+    public void setCollectorOut(){
+        collectorState = CollectorState.OUT;
+    }
+
+    private void collectorOff(){
         collectorMotor.setPower(0);
     }
-    public void collectorIn(){
+    private void collectorIn(){
         collectorMotor.setPower(0.5);
     }
-    public void collectorOut(){
+    private void collectorOut(){
         collectorMotor.setPower(-0.5);
     }
 
