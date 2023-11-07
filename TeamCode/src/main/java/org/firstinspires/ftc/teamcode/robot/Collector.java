@@ -11,14 +11,16 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.CachingMotor;
 
 public class Collector {
-    private Telemetry telemetry;
     private DcMotorEx collectorMotor;
-    private HardwareMap hardwareMap;
-    public Collector(HardwareMap hardwareMap,Telemetry telemetry){
-        this.telemetry=telemetry;
-        this.hardwareMap=hardwareMap;
 
-        collectorMotor = new CachingMotor(hardwareMap.get(DcMotorEx.class, "collector"));
+    private HardwareMap hardwareMap;
+    private Telemetry telemetry;
+
+    public Collector(HardwareMap hardwareMap,Telemetry telemetry){
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
+
+        collectorMotor = new CachingMotor(hardwareMap.get(DcMotorEx.class, "Collector"));
     }
 
     public enum CollectorState {
