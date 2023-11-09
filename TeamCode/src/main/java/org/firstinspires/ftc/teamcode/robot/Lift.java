@@ -1,21 +1,53 @@
 package org.firstinspires.ftc.teamcode.robot;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import java.util.Map;
-
 public class Lift {
-    private Telemetry telemetry;
-    private DcMotorEx LiftMotor;
 
+    private DcMotorEx liftMotor;
+    private HardwareMap hardwareMap;
+    private Telemetry telemetry;
+
+
+    public LiftState liftState;
+
+    
+    public Lift(HardwareMap hardwareMap, Telemetry telemetry){
+        this.liftMotor = liftMotor;
+        this.hardwareMap = hardwareMap;
+        this.telemetry = telemetry;
+
+
+        liftMotor = new org.firstinspires.ftc.teamcode.util.CachingMotor(hardwareMap.get(DcMotorEx.class, "Lift"));
+    }
 
 
     public enum LiftState {
-        DEFAULT, SCORING, MAX, HOLDING
+        DOWN, UP
+    }
+    public void liftState() {
+        switch (liftState) {
+            case DOWN: {
+                setLiftDown();
+                break;
+            }
+            case UP: {
+                setLiftUp();
+                break;
+            }
+        }
     }
 
-    public LiftState liftState = LiftState.DEFAULT;
+    public void setLiftDown(){
+        liftState = Lift.LiftState.DOWN;
+    }
+
+    public void setLiftUp(){
+        liftState = Lift.LiftState.UP;
+    }
+
 
 }
