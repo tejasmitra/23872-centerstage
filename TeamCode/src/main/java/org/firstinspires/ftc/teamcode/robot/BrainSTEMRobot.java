@@ -7,7 +7,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class BrainSTEMRobot {
     HardwareMap hardwareMap;
     Telemetry telemetry;
-//    public Collector collector;
+    public Collector collector;
     public Transfer transfer;
     public Depositor depositor;
     public Lift lift;

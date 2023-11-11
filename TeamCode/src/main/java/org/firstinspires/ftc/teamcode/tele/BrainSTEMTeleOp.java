@@ -28,30 +28,30 @@ public class BrainSTEMTeleOp extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-//            drive.setDrivePowers(new PoseVelocity2d(
-//                    new Vector2d(
-//                            -gamepad1.left_stick_y,
-//                            -gamepad1.left_stick_x
-//                    ),
-//                    -gamepad1.right_stick_x
-//            ));
-//
-//            drive.updatePoseEstimate();
-//
-//            telemetry.addData("x", drive.pose.position.x);
-//            telemetry.addData("y", drive.pose.position.y);
-//            telemetry.addData("heading", drive.pose.heading);
-//            telemetry.update();
+            drive.setDrivePowers(new PoseVelocity2d(
+                    new Vector2d(
+                            -gamepad1.left_stick_y,
+                            -gamepad1.left_stick_x
+                    ),
+                    -gamepad1.right_stick_x
+            ));
 
-//        if (gamepad1.a) {
-//            robot.collector.setCollectorIn();
-//        }
-//        if (gamepad1.b) {
-//            robot.collector.setCollectorOut();
-//        }
-//        if (!gamepad1.a && gamepad1.b) {
-//            robot.collector.setCollectorOff();
-//        }
+            drive.updatePoseEstimate();
+
+            telemetry.addData("x", drive.pose.position.x);
+            telemetry.addData("y", drive.pose.position.y);
+            telemetry.addData("heading", drive.pose.heading);
+            telemetry.update();
+
+        if (gamepad1.a) {
+            robot.collector.setCollectorIn();
+        }
+        if (gamepad1.b) {
+            robot.collector.setCollectorOut();
+        }
+        if (!gamepad1.a && gamepad1.b) {
+           robot.collector.setCollectorOff();
+        }
         }
     }
 }
