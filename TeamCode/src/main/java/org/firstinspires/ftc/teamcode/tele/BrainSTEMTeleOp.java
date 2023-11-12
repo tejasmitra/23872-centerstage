@@ -45,26 +45,26 @@ public class BrainSTEMTeleOp extends LinearOpMode {
 
             if (gamepad1.a) {
                 robot.collector.setCollectorIn();
-                //robot.transfer.setTransferIn();
+                robot.transfer.setTransferIn();
             } else if (gamepad1.b) {
                 robot.collector.setCollectorOut();
-               // robot.transfer.setTransferOut();
+                robot.transfer.setTransferOut();
             } else {
                robot.collector.setCollectorOff();
-              // robot.transfer.setTransferOff();
+               robot.transfer.setTransferOff();
             }
 
-            if (gamepad1.x) {
-                robot.hanging.setHangingUnwind();
-            } else if (gamepad1.y) {
-                robot.hanging.setHangingWind();
-            }
-
-            if (gamepad1.left_bumper) {
-                robot.hanging.setLockState();
-            } else if (gamepad1.right_bumper) {
-                robot.hanging.setUnlockState();
-            }
+//            if (gamepad1.x) {
+//                robot.hanging.setHangingUnwind();
+//            } else if (gamepad1.y) {
+//                robot.hanging.setHangingWind();
+//            }
+//
+//            if (gamepad1.left_bumper) {
+//                robot.hanging.setLockState();
+//            } else if (gamepad1.right_bumper) {
+//                robot.hanging.setUnlockState();
+//            }
 
             robot.update();
 
