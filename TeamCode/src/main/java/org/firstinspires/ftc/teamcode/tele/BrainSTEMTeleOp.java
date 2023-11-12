@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
@@ -17,47 +18,57 @@ import org.firstinspires.ftc.teamcode.robot.BrainSTEMRobot;
 
 @TeleOp (name = "TeleOp", group = "Robot")
 public class BrainSTEMTeleOp extends LinearOpMode {
-
-    private HardwareMap hardwareMap;
-    private Telemetry telemetry;
-
-    private DcMotorEx frontLeft;
-    private DcMotorEx frontRight;
-    private DcMotorEx backLeft;
-    private DcMotorEx backRight;
-
     @Override
     public void runOpMode() {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         BrainSTEMRobot robot = new BrainSTEMRobot(hardwareMap, telemetry);
+
 
         waitForStart();
 
         while (opModeIsActive()) {
             drive.setDrivePowers(new PoseVelocity2d(
                     new Vector2d(
-                            -gamepad1.left_stick_y * 0.2,
-                            -gamepad1.left_stick_x * 0.2
+                            -gamepad1.left_stick_y,
+                            -gamepad1.left_stick_x
                     ),
-                    -gamepad1.right_stick_x * 0.2
+                    -gamepad1.right_stick_x
             ));
 
             drive.updatePoseEstimate();
 
-            telemetry.addData("x", drive.pose.position.x);
-            telemetry.addData("y", drive.pose.position.y);
-            telemetry.addData("heading", drive.pose.heading);
+//            telemetry.addData("x", drive.pose.position.x);
+//            telemetry.addData("y", drive.pose.position.y);
+//            telemetry.addData("heading", drive.pose.heading);
+            telemetry.addData("Tele Collector State", "TEST");
             telemetry.update();
 
-        if (gamepad1.a) {
-            robot.collector.setCollectorIn();
-        }
-        if (gamepad1.b) {
-            robot.collector.setCollectorOut();
-        }
-        if (!gamepad1.a && gamepad1.b) {
-           robot.collector.setCollectorOff();
-        }
+            if (gamepad1.a) {
+                robot.collector.setCollectorIn();
+                //robot.transfer.setTransferIn();
+            } else if (gamepad1.b) {
+                robot.collector.setCollectorOut();
+               // robot.transfer.setTransferOut();
+            } else {
+               robot.collector.setCollectorOff();
+              // robot.transfer.setTransferOff();
+            }
+
+            if (gamepad1.x) {
+                robot.hanging.setHangingUnwind();
+            } else if (gamepad1.y) {
+                robot.hanging.setHangingWind();
+            }
+
+            if (gamepad1.left_bumper) {
+                robot.hanging.setLockState();
+            } else if (gamepad1.right_bumper) {
+                robot.hanging.setUnlockState();
+            }
+
+            robot.update();
+
         }
     }
 }
+

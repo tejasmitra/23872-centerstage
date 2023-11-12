@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.robot;
 
-import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.IN;
-import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.OFF;
-import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.OUT;
+import static org.firstinspires.ftc.teamcode.robot.TransferTele.TransferState.IN;
+import static org.firstinspires.ftc.teamcode.robot.TransferTele.TransferState.OFF;
+import static org.firstinspires.ftc.teamcode.robot.TransferTele.TransferState.OUT;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -10,11 +10,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.CachingMotor;
 
-public class Transfer {
+public class TransferTele {
     private Telemetry telemetry;
-    private DcMotorEx transferMotor;
+    private final DcMotorEx transferMotor;
     private HardwareMap hardwareMap;
-    public Transfer(HardwareMap hardwareMap,Telemetry telemetry) {
+    public TransferTele(HardwareMap hardwareMap,Telemetry telemetry) {
         this.telemetry=telemetry;
         this.hardwareMap=hardwareMap;
 
@@ -46,15 +46,15 @@ public class Transfer {
     }
 
     public void setTransferOff(){
-        transferState = Transfer.TransferState.OFF;
+        transferState = TransferState.OFF;
     }
 
     public void setTransferIn(){
-        transferState = Transfer.TransferState.IN;
+        transferState = TransferState.IN;
     }
 
     public void setTransferOut(){
-        transferState = Transfer.TransferState.OUT;
+        transferState = TransferState.OUT;
     }
     private void transferOff(){
         transferMotor.setPower(0);

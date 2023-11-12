@@ -7,10 +7,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class BrainSTEMRobot {
     HardwareMap hardwareMap;
     Telemetry telemetry;
-    public Collector collector;
-    public Transfer transfer;
-    public Depositor depositor;
+    public CollectorTele collector;
+    public TransferTele transfer;
+//    public Depositor depositor;
     public Lift lift;
+    public Hanging hanging;
 
     public BrainSTEMRobot (HardwareMap hardwareMap, Telemetry telemetry){
 
@@ -18,17 +19,21 @@ public class BrainSTEMRobot {
         this.telemetry = telemetry;
 
 
-//        collector = new Collector(hardwareMap, telemetry);
-        transfer = new Transfer(hardwareMap, telemetry);
-        depositor = new Depositor(hardwareMap, telemetry);
-        lift = new Lift(hardwareMap, telemetry);
+        collector = new CollectorTele(hardwareMap, telemetry);
+        hanging = new Hanging(hardwareMap, telemetry);
+        transfer = new TransferTele(hardwareMap, telemetry);
+//        depositor = new Depositor(hardwareMap, telemetry);
+//        lift = new Lift(hardwareMap, telemetry);
     }
 
     public void update(){
-//        collector.collectorState();
+        telemetry.addData("collectorState", collector.collectorState);
+        collector.setCollectorState();
+        hanging.hangingState();
+        hanging.setServoState();
         transfer.transferState();
-        depositor.depositorState();
-        lift.liftState();
+//        depositor.depositorState();
+//        lift.liftState();
     }
 
 

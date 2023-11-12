@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.robot;
 
-import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.IN;
-import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.OFF;
-import static org.firstinspires.ftc.teamcode.robot.Collector.CollectorState.OUT;
+import static org.firstinspires.ftc.teamcode.robot.CollectorTele.CollectorState.IN;
+import static org.firstinspires.ftc.teamcode.robot.CollectorTele.CollectorState.OFF;
+import static org.firstinspires.ftc.teamcode.robot.CollectorTele.CollectorState.OUT;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -10,13 +10,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.util.CachingMotor;
 
-public class Collector {
+public class CollectorTele {
     private final DcMotorEx collectorMotor;
 
     private HardwareMap hardwareMap;
     private Telemetry telemetry;
 
-    public Collector(HardwareMap hardwareMap,Telemetry telemetry){
+    public CollectorTele(HardwareMap hardwareMap,Telemetry telemetry){
         this.telemetry = telemetry;
 
         collectorMotor = new CachingMotor(hardwareMap.get(DcMotorEx.class, "Collector"));
@@ -28,7 +28,8 @@ public class Collector {
 
     CollectorState collectorState = OFF;
 
-    public void collectorState() {
+    public void setCollectorState() {
+        telemetry.addData("collectorState", collectorState);
         switch (collectorState) {
             case OFF: {
                 collectorOff();
@@ -57,14 +58,11 @@ public class Collector {
         collectorState = CollectorState.OUT;
     }
 
-    private void collectorOff(){
-        collectorMotor.setPower(0);
-    }
+    private void collectorOff() {collectorMotor.setPower(0);}
     private void collectorIn(){
         collectorMotor.setPower(0.5);
     }
-    private void collectorOut(){
-        collectorMotor.setPower(-0.5);
+    private void collectorOut() { collectorMotor.setPower(-0.5);
     }
 
 }
