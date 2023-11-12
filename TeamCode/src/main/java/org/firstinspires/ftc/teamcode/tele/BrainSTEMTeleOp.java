@@ -36,10 +36,10 @@ public class BrainSTEMTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
             drive.setDrivePowers(new PoseVelocity2d(
                     new Vector2d(
-                            -gamepad1.left_stick_y,
-                            -gamepad1.left_stick_x
+                            -gamepad1.left_stick_y * 0.2,
+                            -gamepad1.left_stick_x * 0.2
                     ),
-                    -gamepad1.right_stick_x
+                    -gamepad1.right_stick_x * 0.2
             ));
 
             drive.updatePoseEstimate();
