@@ -26,11 +26,11 @@ public class Lift {
 
 
     public enum LiftState {
-        DOWN, UP
+      one, two, three, four, five, six, seven, eight
     }
-    public void liftState() {
+       public void liftState() {
         switch (liftState) {
-            case DOWN: {
+            case one: {
                 setLiftDown();
                 break;
             }
