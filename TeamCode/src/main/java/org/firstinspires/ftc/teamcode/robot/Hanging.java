@@ -36,6 +36,7 @@ public class Hanging {
         hangingMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftClimber = new CachingServo(hardwareMap.get(ServoImplEx.class, "LClimber"));
         rightClimber = new CachingServo(hardwareMap.get(ServoImplEx.class, "RClimber"));
+
         leftClimber.setPwmRange(new PwmControl.PwmRange(LEFT_CLIMBER_MAX, LEFT_CLIMBER_MIN));
         rightClimber.setPwmRange(new PwmControl.PwmRange(RIGHT_CLIMBER_MAX, RIGHT_CLIMBER_MIN));
     }

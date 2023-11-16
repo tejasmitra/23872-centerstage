@@ -8,42 +8,38 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utils.CachingServo;
 
 public class Depositor {
-     Telemetry telemetry;
+    Telemetry telemetry;
      HardwareMap hardwareMap;
 
+     public DepositorServoState depositorServoState = DepositorServoState.RESTING;
+     private ServoImplEx LeftDepositor;
+    private ServoImplEx RightDepositor;
 
-     // LDS = Left Depositor Servo //
-     private ServoImplEx LDS;
-     // RDS = Right Depositor Servo //
-    private ServoImplEx RDS;
+    private static final double LEFT_DEPOSITOR_MAX = 1500;
+    private static final double LEFT_DEPOSITOR_MIN = 500;
+    private static final double RIGHT_DEPOSITOR_MAX = 1500;
+    private static final double RIGHT_DEPOSITOR_MIN = 500;
 
-    private double ldsMAX = 2250;
-    private double ldsMIN = 0;
-
-    private double rdsMAX = 2250;
-    private double rdsMIN = 0;
 
     public Depositor(HardwareMap hardwareMap,Telemetry telemetry){
         this.telemetry=telemetry;
         this.hardwareMap=hardwareMap;
 
-        LDS = new CachingServo(hardwareMap.get(ServoImplEx.class,"LDS"));
-        RDS = new CachingServo(hardwareMap.get(ServoImplEx.class,"RDS"));
+        LeftDepositor = new CachingServo(hardwareMap.get(ServoImplEx.class,"LeftDepositor"));
+        RightDepositor = new CachingServo(hardwareMap.get(ServoImplEx.class,"RightDepositor"));
 
-        LDS.setPwmRange(new PwmControl.PwmRange(ldsMAX, ldsMIN));
-        RDS.setPwmRange(new PwmControl.PwmRange(ldsMAX, ldsMIN));
+        LeftDepositor.setPwmRange(new PwmControl.PwmRange(LEFT_DEPOSITOR_MAX, LEFT_DEPOSITOR_MIN));
+        RightDepositor.setPwmRange(new PwmControl.PwmRange(RIGHT_DEPOSITOR_MAX, RIGHT_DEPOSITOR_MIN));
 
 
 
     }
 
-    public enum DepositorState{
+    public enum DepositorServoState {
         RESTING, SCORING
     }
-
-    DepositorState depositorState = DepositorState.RESTING;
-    public void depositorState(){
-        switch (depositorState){
+    public void depositorServoState() {
+        switch (depositorServoState){
             case RESTING: {
                 depositorResting();
                 break;
@@ -57,13 +53,16 @@ public class Depositor {
 
 
     private void depositorResting(){
-        LDS.setPosition(0.01);
-        RDS.setPosition(0.01);
+        LeftDepositor.setPosition(0.01);
+        RightDepositor.setPosition(0.01);
     }
     private void depositorScoring(){
-        LDS.setPosition(0.99);
-        RDS.setPosition(0.99);
+        LeftDepositor.setPosition(0.99);
+        RightDepositor.setPosition(0.99);
     }
+
+    public void setRestingState() {depositorServoState = DepositorServoState.RESTING;}
+    public void setScoringState() {depositorServoState = DepositorServoState.SCORING;}
 
 
 }

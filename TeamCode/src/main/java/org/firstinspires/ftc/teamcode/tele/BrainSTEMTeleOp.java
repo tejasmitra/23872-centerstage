@@ -43,15 +43,25 @@ public class BrainSTEMTeleOp extends LinearOpMode {
             telemetry.addData("Tele Collector State", "TEST");
             telemetry.update();
 
-            if (gamepad1.a) {
+            if (gamepad1.right_trigger > 0.5) {
                 robot.collector.setCollectorIn();
                 robot.transfer.setTransferIn();
-            } else if (gamepad1.b) {
+            } else if (gamepad1.left_trigger > 0.5) {
                 robot.collector.setCollectorOut();
                 robot.transfer.setTransferOut();
             } else {
                robot.collector.setCollectorOff();
                robot.transfer.setTransferOff();
+            }
+
+            if (gamepad1.a) {
+//                robot.lift.setLiftUp();
+                robot.depositor.setScoringState();
+            } else if (gamepad1.b){
+//                robot.lift.setLiftDown();
+                robot.depositor.setRestingState();
+            } else {
+//                robot.lift.setLiftOff();
             }
 
             if (gamepad2.x) {
