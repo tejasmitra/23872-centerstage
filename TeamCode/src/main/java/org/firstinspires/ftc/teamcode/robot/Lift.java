@@ -116,25 +116,25 @@ public class Lift {
 //    }
     }
 
-    public void updateLevelCounter(){
-        heightCounter += 218;
-    }
-    public void levelCounter(){
-        if (heightCounter == 0) {
-            liftState = LiftState.ZERO;
-        } else if(heightCounter == 108){
-            liftState = LiftState.ONE;
-        } else if(heightCounter == 326){
-            liftState = LiftState.TWO;
-        } else if(heightCounter == 553){
-            liftState = LiftState.THREE;
-        } else if(heightCounter == 788){
-            liftState = LiftState.FOUR;
-        } else if(heightCounter == 1000){
-            liftState = LiftState.FIVE;
-        }
-
-    }
+//    public void updateLevelCounter(){
+//        heightCounter += 218;
+//    }
+//    public void levelCounter(){
+//        if (heightCounter == 0) {
+//            liftState = LiftState.ZERO;
+//        } else if(heightCounter == 108){
+//            liftState = LiftState.ONE;
+//        } else if(heightCounter == 326){
+//            liftState = LiftState.TWO;
+//        } else if(heightCounter == 553){
+//            liftState = LiftState.THREE;
+//        } else if(heightCounter == 788){
+//            liftState = LiftState.FOUR;
+//        } else if(heightCounter == 1000){
+//            liftState = LiftState.FIVE;
+//        }
+//
+//    }
 
 
     public void setLiftDown () {
