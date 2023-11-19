@@ -33,7 +33,7 @@ public class BrainSTEMRobot {
         hanging.setServoState();
         transfer.transferState();
         depositor.depositorServoState();
-//        lift.liftState();
+        lift.liftState();
     }
 
 

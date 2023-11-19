@@ -22,6 +22,9 @@ public class BrainSTEMTeleOp extends LinearOpMode {
     public void runOpMode() {
         MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         BrainSTEMRobot robot = new BrainSTEMRobot(hardwareMap, telemetry);
+        double power = 0.0;
+        StickyButton stickyButtonA = new StickyButton();
+        StickyButton stickyButtonB = new StickyButton();
 
 
         waitForStart();
@@ -32,8 +35,7 @@ public class BrainSTEMTeleOp extends LinearOpMode {
                             -gamepad1.left_stick_y,
                             -gamepad1.left_stick_x
                     ),
-                    -gamepad1.right_stick_x
-            ));
+                    -gamepad1.right_stick_x * 0.75));
 
             drive.updatePoseEstimate();
 
@@ -54,16 +56,20 @@ public class BrainSTEMTeleOp extends LinearOpMode {
                robot.transfer.setTransferOff();
             }
 
-            if (gamepad1.a) {
-                robot.lift.setLiftUp();
-              //  robot.depositor.setScoringState();
-            } else if (gamepad1.b){
-                robot.lift.setLiftDown();
-               // robot.depositor.setRestingState();
-            } else {
-                robot.lift.setLiftOff();
-            }
+            stickyButtonA.update(gamepad1.a);
+            stickyButtonB.update(gamepad1.b);
 
+            if (stickyButtonA.getState()) {
+                power += 0.005;
+                robot.lift.levelCounter();
+                robot.lift.updateLevelCounter();
+            } else if (stickyButtonB.getState()) {
+                power -= 0.005;
+            }
+            robot.lift.setRawPower(power);
+            telemetry.addData("power", power);
+            telemetry.addData("lift encoder", robot.lift.getPosition());
+            telemetry.addData("lift state", robot.lift.liftState);
             if (gamepad2.x) {
                 robot.hanging.setHangingUnwind();
             } else if (gamepad2.y) {
