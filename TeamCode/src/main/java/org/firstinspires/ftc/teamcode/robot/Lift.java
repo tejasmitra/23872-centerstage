@@ -30,7 +30,7 @@ public class Lift {
     private int liftHeight;
 //    private final static int levelSixHeight = 600;
 //    private final static int levelSevenHeight = 700;
-//    private final static int levelEightHeig
+//    private final static int levelEightHeight
 //    ht = 800;
 
     public void setStateLevelZero() {
@@ -116,8 +116,8 @@ public class Lift {
 //    }
     }
 
-    public void updateLevelCounter(){
-        heightCounter += 218;
+    public void updateLevelCounter() {
+        heigh
     }
     public void levelCounter(){
         if (heightCounter == 0) {

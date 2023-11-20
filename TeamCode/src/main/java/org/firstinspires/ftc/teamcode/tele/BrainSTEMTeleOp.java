@@ -60,11 +60,11 @@ public class BrainSTEMTeleOp extends LinearOpMode {
             stickyButtonB.update(gamepad1.b);
 
             if (stickyButtonA.getState()) {
-                power += 0.005;
+                power += 0.01;
 //                robot.lift.levelCounter();
 //                robot.lift.updateLevelCounter();
             } else if (stickyButtonB.getState()) {
-                power -= 0.005;
+                power -= 0.01;
             }
             robot.lift.setRawPower(power);
             telemetry.addData("power", power);

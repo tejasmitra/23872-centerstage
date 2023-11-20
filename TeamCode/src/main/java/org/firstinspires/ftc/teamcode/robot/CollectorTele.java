@@ -17,62 +17,16 @@ import java.security.SecureRandom;
 
 public class CollectorTele {
     private final DcMotorEx CollectorMotor;
-    public CollectorState CollectorState = CollectorState.OFF;
-    private ServoImplEx Drawbridge;
-    public DrawbridgeState drawbridgeState = DrawbridgeState.ONE;
-    private static final double DRAWBRIDGE_STATE_MAX = 1500;
-    private static final double DRAWBRIDGE_STATE_MIN = 500;
+    public CollectorState collectorState = CollectorState.OFF;
     private HardwareMap hardwareMap;
     private final Telemetry telemetry;
 
-    public CollectorTele(HardwareMap hardwareMap,Telemetry telemetry){
+    public CollectorTele(HardwareMap hardwareMap,Telemetry telemetry) {
         this.telemetry = telemetry;
         this.hardwareMap = hardwareMap;
 
         CollectorMotor = new CachingMotor(hardwareMap.get(DcMotorEx.class, "Collector"));
-        Drawbridge = new CachingServo(hardwareMap.get(ServoImplEx.class, "Drawbridge"));
-
-        Drawbridge.setPwmRange(new PwmControl.PwmRange(DRAWBRIDGE_STATE_MAX,DRAWBRIDGE_STATE_MIN));
     }
-
-    public enum DrawbridgeState {
-        ONE, TWO, THREE, FOUR
-    }
-
-    public void setDrawbridgeState() {
-        switch (setDrawbridgeState) {
-            case ONE: {
-                DrawbridgeOne();
-                break;
-            }
-            case TWO: {
-                DrawbridgeTwo();
-                break;
-            }
-            case THREE: {
-                DrawbridgeThree();
-                break;
-            }
-            case FOUR: {
-                DrawbridgeFour();
-                break;
-
-            }
-        }
-    }
-    private void DrawbridgeOne() {
-        Drawbridge.setPosition(0.01);
-    }
-    private void DrawbridgeTwo() {
-        Drawbridge.setPosition(0.33);
-    }
-    private void DrawbridgeThree() {
-        Drawbridge.setPosition(0.66);
-    }
-    private void DrawbridgeFour() {
-        Drawbridge.setPosition(0.99);
-    }
-
     public enum CollectorState {
         OFF, IN, OUT
     }
